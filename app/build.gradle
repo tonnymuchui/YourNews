@@ -16,9 +16,14 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    buildTypes.each {
+        it.buildConfigField 'String', 'NEWS_API_KEY', NewsApiKey
+    }
 }
 
 dependencies {
+    compile 'com.squareup.retrofit2:converter-gson:2.4.0'
+    implementation 'com.squareup.retrofit2:retrofit:2.4.0'
     implementation 'com.squareup.okhttp3:okhttp:3.2.0'
     implementation 'se.akerfeldt:okhttp-signpost:1.1.0'
     implementation fileTree(include: ['*.jar'], dir: 'libs')
