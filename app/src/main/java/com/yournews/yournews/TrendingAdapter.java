@@ -24,9 +24,9 @@ public class TrendingAdapter extends RecyclerView.Adapter<TrendingAdapter.myView
         this.context = context;
     }
 
-    @NonNull
+
     @Override
-    public myViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+    public TrendingAdapter.myViewHolder onCreateViewHolder( ViewGroup viewGroup, int i) {
         View view= LayoutInflater.from(viewGroup.getContext())
                 .inflate(R.layout.list_item, viewGroup ,false);
 
@@ -34,8 +34,8 @@ public class TrendingAdapter extends RecyclerView.Adapter<TrendingAdapter.myView
     }
 
     @Override
-    public void onBindViewHolder(@NonNull myViewHolder viewHolder, int i) {
-        viewHolder.author.setText(results.get(1).getAuthor());
+    public void onBindViewHolder( myViewHolder viewHolder, int i) {
+        viewHolder.author.setText(results.get(0).getAuthor());
         viewHolder.publishedAt.setText(results.get(i).getPublishedAt());
         viewHolder.title.setText(results.get(i).getTitle());
         viewHolder.desc.setText(results.get(i).getDescription());
@@ -49,11 +49,13 @@ public class TrendingAdapter extends RecyclerView.Adapter<TrendingAdapter.myView
     public int getItemCount() {
         return results.size();
     }
+
+
     public class myViewHolder extends RecyclerView.ViewHolder {
 ImageView imageView;
 TextView author, publishedAt,title,desc,source,time;
 
-        public myViewHolder(@NonNull View itemView) {
+        public myViewHolder(View itemView) {
             super(itemView);
     imageView = itemView.findViewById(R.id.img);
     author = itemView.findViewById(R.id.author);
