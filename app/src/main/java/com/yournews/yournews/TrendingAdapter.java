@@ -9,61 +9,63 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+
 import com.squareup.picasso.Picasso;
+import com.yournews.yournews.models.Articles;
 import com.yournews.yournews.models.News;
 
-import java.util.List;
+import java.util.ArrayList;
 
-public class TrendingAdapter extends RecyclerView.Adapter<TrendingAdapter.myViewHolder> {
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
-    private List<News> results;
-    private Context context;
 
-    public TrendingAdapter( Context context,List<News> results) {
-        this.results = results;
-        this.context = context;
+public class TrendingAdapter extends RecyclerView.Adapter<TrendingAdapter.TrendingViewHolder> {
+
+
+    @NonNull
+
+    private ArrayList<Articles> mArticle;
+    private Context mcontext;
+
+    public TrendingAdapter(Context context, ArrayList<Articles> article){
+        mcontext = context;
+        mArticle = article;
     }
 
 
+    @NonNull
     @Override
-    public TrendingAdapter.myViewHolder onCreateViewHolder( ViewGroup viewGroup, int i) {
-        View view= LayoutInflater.from(viewGroup.getContext())
-                .inflate(R.layout.list_item, viewGroup ,false);
-
-        return new myViewHolder(view);
+    public TrendingAdapter.TrendingViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view =LayoutInflater.from(parent.getContext()).inflate(R.layout.list_item, parent, false);
+        TrendingAdapter.TrendingViewHolder viewHolder = new TrendingAdapter.TrendingViewHolder(view);
+        return viewHolder;
     }
 
     @Override
-    public void onBindViewHolder( myViewHolder viewHolder, int i) {
-        viewHolder.author.setText(results.get(0).getAuthor());
-        viewHolder.publishedAt.setText(results.get(i).getPublishedAt());
-        viewHolder.title.setText(results.get(i).getTitle());
-        viewHolder.desc.setText(results.get(i).getDescription());
-        viewHolder.source.setText((CharSequence) results.get(i).getSource());
-
-        Picasso.with(context).load("https://cdn.cnn.com/cnnnext/dam/assets/"+results.get(i)
-                .getUrlToImage()).into(viewHolder.imageView);
+    public void onBindViewHolder(@NonNull TrendingAdapter.TrendingViewHolder viewHolder, int i) {
+        viewHolder.bindArticles(mArticle.get(i));
     }
 
     @Override
     public int getItemCount() {
-        return results.size();
+        return mArticle.size();
     }
 
-
-    public class myViewHolder extends RecyclerView.ViewHolder {
-ImageView imageView;
-TextView author, publishedAt,title,desc,source,time;
-
-        public myViewHolder(View itemView) {
+    public class TrendingViewHolder extends RecyclerView.ViewHolder{
+        @BindView(R.id.img)ImageView mImage;
+        @BindView(R.id.desc)TextView mDesc;
+        @BindView(R.id.author)TextView mAuthor;
+        public TrendingViewHolder(@NonNull View itemView) {
             super(itemView);
-    imageView = itemView.findViewById(R.id.img);
-    author = itemView.findViewById(R.id.author);
-    publishedAt = itemView.findViewById(R.id.publishedAt);
-    title = itemView.findViewById(R.id.title);
-    desc = itemView.findViewById(R.id.desc);
-    source = itemView.findViewById(R.id.source);
-    time = itemView.findViewById(R.id.time);
+            ButterKnife.bind(this,itemView);
+            mcontext = itemView.getContext();
         }
+        public void bindArticles(Articles article){
+            Picasso.get().load(article.getUrlToImage()).into(mImage);
+            mDesc.setText(article.getDescription());
+            mAuthor.setText(article.getAuthor());
+        }
+
     }
 }
