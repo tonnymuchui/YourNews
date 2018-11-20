@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".NewsActivity"
+    tools:context=".NewsDetails"
     android:id="@+id/main_layout">
 
     <android.support.v4.widget.NestedScrollView
@@ -17,22 +17,14 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <EditText
-                android:id="@+id/editText"
-                android:layout_width="296dp"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="textPersonName"
-                android:text="Search" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:fontFamily="sans-serif-light"
-                android:text="Headlines"
+                android:text="Search Results"
                 android:textSize="22sp"
-
                 android:textStyle="bold" />
 
             <android.support.v7.widget.RecyclerView
@@ -44,12 +36,5 @@
             </android.support.v7.widget.RecyclerView>
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
-    <ImageButton
-        android:id="@+id/imageButton"
-        android:layout_width="wrap_content"
-        android:layout_height="47dp"
-        app:layout_anchor="@+id/nestedScrollView"
-        app:layout_anchorGravity="right|top"
-        app:srcCompat="@android:drawable/ic_menu_search" />
 
 </android.support.design.widget.CoordinatorLayout>

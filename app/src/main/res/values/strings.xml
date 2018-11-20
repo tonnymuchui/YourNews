@@ -13,4 +13,5 @@
         completions."
     </string>
     <string name="title_activity_news">News</string>
+    <string name="title_activity_news_details">NewsDetails</string>
 </resources>
