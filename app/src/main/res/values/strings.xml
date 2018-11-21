@@ -3,7 +3,7 @@
     <!-- Strings related to login -->
     <string name="action_sign_in_short">Register</string>
     <string name="email">Email</string>
-    <string name="minimum_password">Password too short, enter minimum 6 characters!</string>
+    <string name="minimum_password">Password too short, enter Minimum 6 characters!</string>
     <string name="auth_failed">Authentication failed, check your email and password or sign up</string>
     <string name="change_email">Change Email</string>
     <string name="change_password">Change Password</string>
@@ -16,7 +16,7 @@
     <string name="hint_password">Password</string>
     <string name="hint_name">Fullname</string>
     <string name="btn_login">LOGIN</string>
-    <string name="btn_link_to_register">Not a member? Get registered in Firebase now!</string>
+    <string name="btn_link_to_register">Get registered now!</string>
     <string name="btn_link_to_login">Already registered. Login Me!</string>
     <string name="title_activity_reset_password">ResetPasswordActivity</string>
     <string name="btn_forgot_password">Forgot your password?</string>
@@ -28,7 +28,7 @@
     <string name="btn_remove">Remove</string>
     <string name="btn_sign_out">Sign Out</string>
     <string name="lbl_forgot_password">Forgot password?</string>
-    <string name="forgot_password_msg">We just need your registered Email Id to sent you password reset instructions.</string>
+    <string name="forgot_password_msg">Provide your registered Email to reset password.</string>
 
     <string name="title_activity_news">News</string>
     <string name="title_activity_news_details">NewsDetails</string>

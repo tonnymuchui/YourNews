@@ -82,7 +82,7 @@ auth = FirebaseAuth.getInstance();
                                 if (!task.isSuccessful()){
                                     Toast.makeText(SignupActivity.this, "Authentication failed." + task.getException(), Toast.LENGTH_SHORT).show();
                                 }else {
-                                    startActivity(new Intent(SignupActivity.this, NewsActivity.class));
+                                    startActivity(new Intent(SignupActivity.this, LoginActivity.class));
                                     finish();
                                 }
                             }
