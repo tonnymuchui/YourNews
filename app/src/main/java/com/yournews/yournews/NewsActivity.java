@@ -53,6 +53,7 @@ public class NewsActivity extends AppCompatActivity {
                 String headline = meditText.getText().toString();
                 if (!headline.isEmpty()){
 Intent intent = new Intent(NewsActivity.this,NewsDetails.class);
+intent.putExtra("SEARCH",headline);
 startActivity(intent);
                 }
             }
