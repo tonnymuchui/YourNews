@@ -33,7 +33,6 @@ public class TrendingAdapter extends RecyclerView.Adapter<TrendingAdapter.Trendi
         mArticle = article;
     }
 
-
     @NonNull
     @Override
     public TrendingAdapter.TrendingViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -56,6 +55,8 @@ public class TrendingAdapter extends RecyclerView.Adapter<TrendingAdapter.Trendi
         @BindView(R.id.img)ImageView mImage;
         @BindView(R.id.desc)TextView mDesc;
         @BindView(R.id.author)TextView mAuthor;
+        @BindView(R.id.publishedAt) TextView mpublishedAt;
+        @BindView(R.id.title) TextView mtitle;
         public TrendingViewHolder(@NonNull View itemView) {
             super(itemView);
             ButterKnife.bind(this,itemView);
@@ -65,7 +66,8 @@ public class TrendingAdapter extends RecyclerView.Adapter<TrendingAdapter.Trendi
             Picasso.get().load(article.getUrlToImage()).into(mImage);
             mDesc.setText(article.getDescription());
             mAuthor.setText(article.getAuthor());
+            mpublishedAt.setText(article.getPublishedAt());
+            mtitle.setText(article.getTitle());
         }
-
     }
 }
