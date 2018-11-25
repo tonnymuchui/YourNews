@@ -57,6 +57,7 @@ public class TrendingAdapter extends RecyclerView.Adapter<TrendingAdapter.Trendi
         @BindView(R.id.author)TextView mAuthor;
         @BindView(R.id.publishedAt) TextView mpublishedAt;
         @BindView(R.id.title) TextView mtitle;
+
         public TrendingViewHolder(@NonNull View itemView) {
             super(itemView);
             ButterKnife.bind(this,itemView);
