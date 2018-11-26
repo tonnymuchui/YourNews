@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 
@@ -27,6 +28,7 @@ public class NewsActivity extends AppCompatActivity {
     public static final   String TAG = NewsActivity.class.getSimpleName();
     @BindView(R.id.toolbar)
     android.support.v7.widget.Toolbar toolbar;
+    @BindView(R.id.button) Button buttonMain;
     @BindView(R.id.imageButton) ImageButton mbutton;
     @BindView(R.id.recyclerView) RecyclerView mRecyclerView;
     private TrendingAdapter mtrendingAdapter;
@@ -49,8 +51,14 @@ startActivity(intent);
 
             }
         });
+        buttonMain.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(NewsActivity.this,MainActivity.class);
+                startActivity(intent);
+            }
+        });
     }
-
     private void getNews() {
 
         final NewsService newsService = new NewsService();

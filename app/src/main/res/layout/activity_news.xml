@@ -13,11 +13,24 @@
         android:theme="@style/AppTheme.AppBarOverlay"
         android:background="@color/colorAccent">
 
-        <ImageButton
-            android:id="@+id/imageButton"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:src="@drawable/ic_menu_black_24dp" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageButton
+                android:id="@+id/imageButton"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:src="@drawable/ic_menu_black_24dp" />
+
+            <Button
+                android:layout_marginLeft="228dp"
+                android:id="@+id/button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Comment" />
+
+        </LinearLayout>
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
@@ -39,14 +52,16 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <TextView
+            <com.tomer.fadingtextview.FadingTextView
+                android:fontFamily="sans-serif-condensed"
+                android:textStyle="bold"
+                android:textSize="22sp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="60dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="70dp"
-                android:fontFamily="sans-serif-condensed"
-                android:text="Headlines"
-                android:textSize="22sp"
-                android:textStyle="bold" />
+                app:texts="@array/text"
+                app:timeout="500"/>
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/recyclerView"

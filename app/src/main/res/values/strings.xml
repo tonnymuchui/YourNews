@@ -1,6 +1,11 @@
 <resources>
     <string name="app_name">YourNews</string>
     <!-- Strings related to login -->
+    <string-array name="text">
+    <item>Get news headLine</item>
+    <item>Subscribe to the HeadLines</item>
+    </string-array>
+
     <string name="action_sign_in_short">Register</string>
     <string name="email">Email</string>
     <string name="minimum_password">Password too short, enter Minimum 6 characters!</string>
@@ -33,4 +38,7 @@
     <string name="title_activity_news">News</string>
     <string name="title_activity_news_details">NewsDetails</string>
     <string name="title_activity_signup">SignupActivity</string>
+    <string name="title_activity_main">MainActivity</string>
+    
+    
 </resources>
