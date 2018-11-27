@@ -34,10 +34,7 @@ public class MainActivity extends AppCompatActivity {
 //    //view objects
     @BindView(R.id.buttonDialog) Button buttonDialogs;
     @BindView(R.id.listViewArtists) ListView listViewDiaries;
-    @BindView(R.id.spinnerGenres) EditText spinnerGenre;
-    @BindView(R.id. editTextName) EditText editTextName;
-    @BindView(R.id.editTextDate) EditText editTextDate;
-    @BindView(R.id.buttonAddArtist) Button buttonAddDiaries;
+
     List<Diary> diaries = new ArrayList<>();
     DatabaseReference databaseDiaries;
     @Override
@@ -49,34 +46,9 @@ public class MainActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         databaseDiaries = FirebaseDatabase.getInstance().getReference("diaries");
-        buttonAddDiaries.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
 
-                addDiary();
-            }
-        });
     }
 
-    private void addDiary() {
-        //getting the values to save
-        String name = editTextName.getText().toString().trim();
-        String diaryDesc = spinnerGenre.getText().toString().trim();
-        String date = editTextDate.getText().toString().trim();
-
-        if (!TextUtils.isEmpty(name)) {
-
-            String id = databaseDiaries.push().getKey();
-            Diary diary = new Diary(id, name, diaryDesc,date);
-            databaseDiaries.child(id).setValue(diary);
-            editTextName.setText("");
-            spinnerGenre.setText("");
-            editTextDate.setText("");
-            Toast.makeText(this, "Diary added", Toast.LENGTH_LONG).show();
-        } else {
-            Toast.makeText(this, "Please enter a name", Toast.LENGTH_LONG).show();
-        }
-    }
 
     @Override
     protected void onStart() {
@@ -92,6 +64,12 @@ public class MainActivity extends AppCompatActivity {
                         Diary diary = diaries.get(i);
                         showUpdateDeleteDialog(diary.getDiaryId(), diary.getUName());
                         return true;
+                    }
+                });
+                buttonDialogs.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                       ShowAddDialog();
                     }
                 });
 
@@ -121,7 +99,7 @@ public class MainActivity extends AppCompatActivity {
         Toast.makeText(getApplicationContext(), "Diary Updated", Toast.LENGTH_LONG).show();
         return true;
     }
-    private void ShowAddDialog(final String diaryId,String diaryName){
+    private void ShowAddDialog(){
         AlertDialog.Builder mbuilder = new AlertDialog.Builder(this);
        LayoutInflater inflater = getLayoutInflater();
        final View dialogView = inflater.inflate(R.layout.add_diary, null);
@@ -130,17 +108,25 @@ public class MainActivity extends AppCompatActivity {
        final  EditText editTextName = (EditText) dialogView.findViewById(R.id.editTextNamem);
         final EditText spinnerGenre = (EditText) dialogView.findViewById(R.id.spinnerGenresm);
         final EditText editTextDate = (EditText) dialogView.findViewById(R.id.editTextDatem);
-        final Button buttonCreate = (Button) dialogView.findViewById(R.id.buttonDialog);
+        final Button buttonCreate = (Button) dialogView.findViewById(R.id.buttonAddArtistm);
         final AlertDialog d = mbuilder.create();
         d.show();
-
         buttonCreate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String name = editTextName.getText().toString().trim();
-                String genre = spinnerGenre.getText().toString().trim();
+                String diaryDesc = spinnerGenre.getText().toString().trim();
                 String date = editTextDate.getText().toString().trim();
+                if (!TextUtils.isEmpty(name)) {
 
+                    String id = databaseDiaries.push().getKey();
+                    Diary diary = new Diary(id, name, diaryDesc,date);
+                    databaseDiaries.child(id).setValue(diary);
+                    editTextName.setText("");
+                    spinnerGenre.setText("");
+                    editTextDate.setText("");
+                    d.dismiss();
+                }
             }
         });
     }

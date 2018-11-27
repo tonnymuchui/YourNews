@@ -9,13 +9,13 @@
         android:id="@+id/editTextNamem"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Enter Nour Name" />
+        android:hint="Enter Your Name" />
 
     <EditText
         android:id="@+id/spinnerGenresm"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Diary">
+        android:hint="Comment">
     </EditText>
 
     <EditText
@@ -30,11 +30,11 @@
         android:layout_height="wrap_content">
 
         <Button
-            android:id="@+id/buttonAddArtist"
+            android:id="@+id/buttonAddArtistm"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/spinnerGenres"
-            android:text="Add Diary" />
+            android:text="Comment" />
     </LinearLayout>
 
 </LinearLayout>
