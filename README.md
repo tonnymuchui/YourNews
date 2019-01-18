@@ -30,6 +30,7 @@ You will need to:
 
 * java
 * Android framework
+* Firebase DB
 
 ## License
 

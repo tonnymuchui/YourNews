@@ -1,62 +1,90 @@
 package com.yournews.yournews;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.design.widget.TabLayout;
-import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageButton;
 
-public class NewsActivity extends AppCompatActivity implements TabLayout.OnTabSelectedListener {
+import com.yournews.yournews.Api.NewsService;
+import com.yournews.yournews.models.Articles;
 
-    private TabLayout tabLayout;
-    private ViewPager viewPager;
+import java.io.IOException;
+import java.util.ArrayList;
+
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.Response;
+
+public class NewsActivity extends AppCompatActivity {
+    public static final   String TAG = NewsActivity.class.getSimpleName();
+    @BindView(R.id.toolbar)
+    android.support.v7.widget.Toolbar toolbar;
+    @BindView(R.id.button) Button buttonMain;
+    @BindView(R.id.imageButton) ImageButton mbutton;
+    @BindView(R.id.recyclerView) RecyclerView mRecyclerView;
+    private TrendingAdapter mtrendingAdapter;
+    private SharedPreferences mSharedPreferences;
+    public ArrayList<Articles> articles = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_news);
-
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        ButterKnife.bind(this);
+        getNews();
 
-        tabLayout = (TabLayout) findViewById(R.id.tabLayout);
-        tabLayout.addTab(tabLayout.newTab().setText("Trending"));
-        tabLayout.addTab(tabLayout.newTab().setText("Business"));
-        tabLayout.addTab(tabLayout.newTab().setText("Politics"));
-        tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
-
-        viewPager = (ViewPager) findViewById(R.id.pager);
-        Pager adapter = new Pager(getSupportFragmentManager(), tabLayout.getTabCount());
-        viewPager.setAdapter(adapter);
-        viewPager.setOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
-        tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+        mbutton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onTabSelected(TabLayout.Tab tab) {
-                viewPager.setCurrentItem(tab.getPosition());
-            }
-
-            @Override
-            public void onTabUnselected(TabLayout.Tab tab) {
-
-            }
-
-            @Override
-            public void onTabReselected(TabLayout.Tab tab) {
+            public void onClick(View v) {
+Intent intent = new Intent(NewsActivity.this,Profile.class);
+startActivity(intent);
 
             }
         });
+        buttonMain.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(NewsActivity.this,MainActivity.class);
+                startActivity(intent);
+            }
+        });
     }
+    private void getNews() {
 
-    @Override
-    public void onTabSelected(TabLayout.Tab tab) {
-        viewPager.setCurrentItem(tab.getPosition());
-    }
-    @Override
-    public void onTabUnselected(TabLayout.Tab tab) {
+        final NewsService newsService = new NewsService();
 
-    }
-    @Override
-    public void onTabReselected(TabLayout.Tab tab) {
+        NewsService.getNews(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                e.printStackTrace();
+            }
 
+            @Override
+            public void onResponse(Call call, Response response) throws  IOException {
+
+                articles = newsService.findNews(response);
+                NewsActivity.this.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        mtrendingAdapter = new TrendingAdapter( NewsActivity.this, articles);
+                        mRecyclerView.setAdapter(mtrendingAdapter);
+                        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(NewsActivity.this);
+                        mRecyclerView.setLayoutManager(layoutManager);
+                       mRecyclerView.setHasFixedSize(true);
+                    }
+                });
+            }
+        });
     }
 }
+

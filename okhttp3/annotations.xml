@@ -1,0 +1,5 @@
+<root>
+    <item name='okhttp3.Callback'>
+        <annotation name='java.lang.Deprecated' />
+    </item>
+</root>
