@@ -5,7 +5,7 @@
 
 ## Description
 
-This is an app that allows you to view wold news.
+This is an app that allows you to view world news.
 
 ## Getting Started
 These instructions will get you a copy of the project up and running on your phone.
